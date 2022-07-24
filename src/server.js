@@ -1,5 +1,5 @@
 import Hapi from "@hapi/hapi";
-import { routes } from "./routes.mjs";
+import { routes } from "./routes.js";
 
 const init = async () => {
   const server = Hapi.server({
