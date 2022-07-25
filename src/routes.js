@@ -1,4 +1,8 @@
-import { addBookHandler, getBooksHandler } from "./handler.js";
+import {
+  addBookHandler,
+  getBooksHandler,
+  getBookByIdHandler,
+} from "./handler.js";
 
 export const routes = [
   {
@@ -9,6 +13,11 @@ export const routes = [
   {
     method: "GET",
     path: "/books",
-    handler: getBooksHandler
+    handler: getBooksHandler,
+  },
+  {
+    method: "GET",
+    path: "/books/{bookId}",
+    handler: getBookByIdHandler,
   },
 ];
