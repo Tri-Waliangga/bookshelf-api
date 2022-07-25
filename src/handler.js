@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import bookshelf from "./bookshelf.js";
 
-export const addNoteHandler = (request, h) => {
+export const addBookHandler = (request, h) => {
   const {
     name,
     year,
