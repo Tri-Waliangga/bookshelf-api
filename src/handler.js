@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import bookshelf from "./bookshelf.js";
+import books from "./bookshelf.js";
 
 export const addBookHandler = (request, h) => {
   const {
@@ -52,9 +52,9 @@ export const addBookHandler = (request, h) => {
     updatedAt,
   };
 
-  bookshelf.push(newBook);
+  books.push(newBook);
 
-  const isSuccess = bookshelf.filter((book) => book.id === id).length > 0;
+  const isSuccess = books.filter((book) => book.id === id).length > 0;
 
   if (isSuccess) {
     const response = h.response({
@@ -75,3 +75,10 @@ export const addBookHandler = (request, h) => {
   response.code(500);
   return response;
 };
+
+export const getBooksHandler = () => ({
+  status: "success",
+  data: {
+    books
+  }
+});

@@ -1,3 +1,3 @@
-const bookshelf = [];
+const books = [];
 
-export default bookshelf;
+export default books;
