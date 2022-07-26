@@ -1,7 +1,7 @@
 import {
   addBookHandler,
   getBooksHandler,
-  getBookByIdHandler,
+  getBookDetailByIdHandler,
   editBookByIdHandler,
   deleteBookByIdHandler,
 } from "./handler.js";
@@ -20,7 +20,7 @@ export const routes = [
   {
     method: "GET",
     path: "/books/{bookId}",
-    handler: getBookByIdHandler,
+    handler: getBookDetailByIdHandler,
   },
   {
     method: "PUT",

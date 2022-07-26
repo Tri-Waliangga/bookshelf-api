@@ -76,14 +76,109 @@ export const addBookHandler = (request, h) => {
   return response;
 };
 
-export const getBooksHandler = () => ({
-  status: "success",
-  data: {
-    books,
-  },
-});
+export const getBooksHandler = (request, h) => {
+  const { reading, finished, name } = request.query;
 
-export const getBookByIdHandler = (request, h) => {
+  if (reading === 1) {
+    const response = h.response({
+      status: "success",
+      data: {
+        books: books
+          .filter((b) => b.reading === true)
+          .map((b) => ({
+            id: b.id,
+            name: b.name,
+            publisher: b.publisher,
+          })),
+      },
+    });
+    response.code(200);
+    return response;
+  }
+
+  if (reading === 0) {
+    const response = h.response({
+      status: "success",
+      data: {
+        books: books
+          .filter((b) => b.reading === false)
+          .map((b) => ({
+            id: b.id,
+            name: b.name,
+            publisher: b.publisher,
+          })),
+      },
+    });
+    response.code(200);
+    return response;
+  }
+
+  if (finished === 1) {
+    const response = h.response({
+      status: "success",
+      data: {
+        books: books
+          .filter((b) => b.readPage === b.pageCount)
+          .map((b) => ({
+            id: b.id,
+            name: b.name,
+            publisher: b.publisher,
+          })),
+      },
+    });
+    response.code(200);
+    return response;
+  }
+
+  if (finished === 0) {
+    const response = h.response({
+      status: "success",
+      data: {
+        books: books
+          .filter((b) => b.readPage < b.pageCount)
+          .map((b) => ({
+            id: b.id,
+            name: b.name,
+            publisher: b.publisher,
+          })),
+      },
+    });
+    response.code(200);
+    return response;
+  }
+
+  if (typeof name === "string" && name.toLocaleLowerCase() === "dicoding") {
+    const response = h.response({
+      status: "success",
+      data: {
+        books: books
+          .filter((b) => b.name.toLocaleLowerCase() === "dicoding")
+          .map((b) => ({
+            id: b.id,
+            name: b.name,
+            publisher: b.publisher,
+          })),
+      },
+    });
+    response.code(200);
+    return response;
+  }
+
+  const response = h.response({
+    status: "success",
+    data: {
+      books: books.map((b) => ({
+        id: b.id,
+        name: b.name,
+        publisher: b.publisher,
+      })),
+    },
+  });
+  response.code(200);
+  return response;
+};
+
+export const getBookDetailByIdHandler = (request, h) => {
   const { bookId } = request.params;
 
   const book = books.filter((b) => b.id === bookId)[0];
