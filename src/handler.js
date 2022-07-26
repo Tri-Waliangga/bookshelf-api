@@ -79,7 +79,7 @@ export const addBookHandler = (request, h) => {
 export const getBooksHandler = (request, h) => {
   const { reading, finished, name } = request.query;
 
-  if (reading === 1) {
+  if (reading === "1") {
     const response = h.response({
       status: "success",
       data: {
@@ -96,7 +96,7 @@ export const getBooksHandler = (request, h) => {
     return response;
   }
 
-  if (reading === 0) {
+  if (reading === "0") {
     const response = h.response({
       status: "success",
       data: {
@@ -113,7 +113,7 @@ export const getBooksHandler = (request, h) => {
     return response;
   }
 
-  if (finished === 1) {
+  if (finished === "1") {
     const response = h.response({
       status: "success",
       data: {
@@ -130,7 +130,7 @@ export const getBooksHandler = (request, h) => {
     return response;
   }
 
-  if (finished === 0) {
+  if (finished === "0") {
     const response = h.response({
       status: "success",
       data: {
@@ -152,7 +152,7 @@ export const getBooksHandler = (request, h) => {
       status: "success",
       data: {
         books: books
-          .filter((b) => b.name.toLocaleLowerCase() === "dicoding")
+          .filter((b) => b.name.toLocaleLowerCase().includes("dicoding"))
           .map((b) => ({
             id: b.id,
             name: b.name,
