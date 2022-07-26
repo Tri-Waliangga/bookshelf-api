@@ -169,3 +169,26 @@ export const editBookByIdHandler = (request, h) => {
   response.code(404);
   return response;
 };
+
+export const deleteBookByIdHandler = (request, h) => {
+  const { bookId } = request.params;
+
+  const idxBook = books.findIndex((b) => b.id === bookId);
+
+  if (idxBook !== -1) {
+    books.splice(idxBook, 1);
+    const response = h.response({
+      status: "success",
+      message: "Buku berhasil dihapus",
+    });
+    response.code(200);
+    return response;
+  }
+
+  const response = h.response({
+    status: "fail",
+    message: "Buku gagal dihapus. Id tidak ditemukan",
+  });
+  response.code(404);
+  return response;
+};
